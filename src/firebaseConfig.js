@@ -24,17 +24,11 @@ const settings = {
 db.settings(settings)
 
 // firebase collections
-const usersCollection = db.collection('users')
-const postsCollection = db.collection('posts')
-const commentsCollection = db.collection('comments')
-const likesCollection = db.collection('likes')
+const listsCollection = db.collection('listes')
 
 export {
     db,
     auth,
     currentUser,
-    usersCollection,
-    postsCollection,
-    commentsCollection,
-    likesCollection
+    listsCollection,
 }

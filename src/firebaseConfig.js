@@ -25,10 +25,12 @@ db.settings(settings)
 
 // firebase collections
 const listsCollection = db.collection('listes')
+const detailsCollection = db.collection('details')
 
 export {
     db,
     auth,
     currentUser,
     listsCollection,
+    detailsCollection,
 }

@@ -24,7 +24,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['Lists'])
+    ...mapState(['Lists','Details'])
   },
 }
 </script>

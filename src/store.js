@@ -16,16 +16,35 @@ fb.listsCollection.onSnapshot(querySnapshot => {
     store.commit('setLists', listsArray)
 })
 
+fb.detailsCollection.onSnapshot(querySnapshot => {
+    let detailsArray = []
+
+    querySnapshot.forEach(doc => {
+        let Detail = doc.data()
+        Detail.id = doc.id
+        detailsArray.push(Detail)
+    })
+
+    store.commit('setDetails', detailsArray)
+})
+
 export const store = new Vuex.Store({
     state: {
+        Details: [],
         Lists: []
     },
     actions: {
         
     }, 
     mutations: {
+        setDetails(state, val) {
+            if (val) {
+                state.Details = val
+            } else {
+                state.Details = []
+            }
+        },
         setLists(state, val) {
-            console.log({val});
             if (val) {
                 state.Lists = val
             } else {

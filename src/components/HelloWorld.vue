@@ -2,12 +2,8 @@
   <div class="Feuille">
     <h1>Listes</h1>
     <br>
-    <a href="/login">Test 1</a><br>
-    <a href="/toto">Test 2</a><br>
-    <div v-if="Lists.length">
-      <a v-for="list in Lists" :key="list.id" :href="'/'+list.slug">
-        {{ list.titre }}
-      </a>
+    <div v-if="Lists.length" v-for="list in Lists" :key="list.id">
+      <a :href="'#/'+list.slug">{{ list.titre }}</a><br>
     </div>
   </div>
 </template>

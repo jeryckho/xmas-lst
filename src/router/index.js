@@ -8,7 +8,7 @@ import Void from '@/components/void'
 Vue.use(Router)
 
 const routeur = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '*',

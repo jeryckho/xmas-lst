@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 
 import HelloWorld from '@/components/HelloWorld'
+import Detail from '@/components/detail'
 import Void from '@/components/void'
 
 Vue.use(Router)
@@ -18,6 +19,11 @@ const routeur = new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/detail',
+      name: 'Detail',
+      component: Detail
     },
     {
       path: '/test',

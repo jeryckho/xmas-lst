@@ -1,9 +1,11 @@
 <template>
   <div class="Feuille">
-    <h1>Liste</h1>  <!-- Titre -->
-    <em>(Cliquez sur une image pour voir les détails, clic-droit pour réserver l'élément)</em><br><br>
-      <!-- {!! $liste->description !!} --><br>
-    <div v-if="Details.length" v-for="kdo in Details" :key="kdo.id" class="Kdo pointer" :style="getStyle(kdo)">
+    <div v-if="slugList">
+      <h1 v-html="slugList.titre"></h1>
+      <em>(Cliquez sur une image pour voir les détails, clic-droit pour réserver l'élément)</em><br><br>
+      <span v-html="slugList.description"></span><br>
+    </div>
+    <div v-if="Details.length" v-for="kdo in slugDetails" :key="kdo.id" class="Kdo pointer" :style="getStyle(kdo)">
         <a v-if="kdo.hasimage == 1" :href="kdo.link" target="_blank"><img class="ki" :src="kdo.image"></a>
         <img class="ki" src="/static/img/Rcroix.svg" v-show="kdo.status == 0">
     </div>
@@ -22,21 +24,31 @@ export default {
     }
   },
   computed: {
-    ...mapState(['Lists','Details'])
+    ...mapState(['Lists','Details']),
+    slugDetails: function() {
+      return this.Details.filter(item => item.slug === this.$route.params.slug)
+    },
+    slugList: function() {
+      const lsts = this.Lists.filter(item => item.slug === this.$route.params.slug);
+      return (lsts.length) ? lsts[0] : null;
+    },
   },
   methods: {
-      getStyle: function(elt) {
-          let style = JSON.parse(elt.style);
-        return {
-      'top':    style[0],
-      'left':   style[1],
-      'height': style[2],
-      'width':  style[3],
-      'transform':         'rotate('+style[4]+'deg)',
-      '-webkit-transform': 'rotate('+style[4]+'deg)',
-      '-ms-transform':     'rotate('+style[4]+'deg)'
-        }
+    slugged: function(dtl) {
+      return dtl.filter(item => item.slug === this.$route.params.slug)
+    },
+    getStyle: function(elt) {
+      let style = JSON.parse(elt.style);
+      return {
+        'top':    style[0],
+        'left':   style[1],
+        'height': style[2],
+        'width':  style[3],
+        'transform':         'rotate('+style[4]+'deg)',
+        '-webkit-transform': 'rotate('+style[4]+'deg)',
+        '-ms-transform':     'rotate('+style[4]+'deg)'
       }
+    }
   }
 }
 </script>

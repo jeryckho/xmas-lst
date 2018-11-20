@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
 
-import HelloWorld from '@/components/HelloWorld'
+import List from '@/components/list'
 import Detail from '@/components/detail'
 import Void from '@/components/void'
 
@@ -13,31 +13,18 @@ const routeur = new Router({
   routes: [
     {
       path: '*',
-      redirect: '/test'
+      redirect: '/listes'
     },
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/listes',
+      name: 'List',
+      component: List
     },
     {
-      path: '/detail',
+      path: '/liste/:slug',
       name: 'Detail',
       component: Detail
     },
-    {
-      path: '/test',
-      name: 'Test',
-      component: Void
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Void,
-        meta: {
-            requiresAuth: true
-        }
-    }
   ]
 })
 

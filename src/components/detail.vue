@@ -5,27 +5,64 @@
       <em>(Cliquez sur une image pour voir les détails, clic-droit pour réserver l'élément)</em><br><br>
       <span v-html="slugList.description"></span><br>
     </div>
-    <div v-if="Details.length" v-for="kdo in slugDetails" :key="kdo.id" class="Kdo pointer" :style="getStyle(kdo)">
-      <a v-if="kdo.link != ''" :href="kdo.link" target="_blank">
-        <img v-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image">
+    <div
+      v-if="Details.length"
+      v-for="kdo in slugDetails"
+      :key="kdo.id"
+      class="Kdo pointer"
+      :style="getStyle(kdo)"
+      @contextmenu.prevent="$refs.ctxMenu.open($event, kdo)"
+    >
+      <a
+        v-if="kdo.link != ''"
+        :href="kdo.link"
+        target="_blank"
+      >
+        <img
+          v-if="kdo.hasimage == 1"
+          class="ki"
+          :src="kdo.image"
+          :alt="kdo.image"
+        >
       </a>
-      <img v-else-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image">
-      <div class="nop" v-show="kdo.status == 0"></div>
+      <img
+        v-else-if="kdo.hasimage == 1"
+        class="ki"
+        :src="kdo.image"
+        :alt="kdo.image"
+      >
+      <div
+        class="nop"
+        v-show="kdo.status == 0"
+      ></div>
     </div>
+    <context-menu
+      id="context-menu"
+      ref="ctxMenu"
+      @ctx-open="onCtxOpen"
+    >
+      <div v-if="current">
+        <li :class="{'ctx-item':true, disabled:(current.status == 0)}" @click="Take" >Réserver</li>
+        <li :class="{'ctx-item':true, disabled:(current.status != 0)}" @click="Free" >Libérer</li>
+      </div>
+    </context-menu>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import contextMenu from 'vue-context-menu'
 const fb = require('../firebaseConfig.js')
 
 export default {
   name: 'Detail',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      current: null
     }
   },
+  components: { contextMenu },
   computed: {
     ...mapState(['Lists','Details']),
     slugDetails: function() {
@@ -37,8 +74,14 @@ export default {
     },
   },
   methods: {
-    slugged: function(dtl) {
-      return dtl.filter(item => item.slug === this.$route.params.slug)
+    Take() {
+      this.current.status = 0;
+    },
+    Free() {
+      this.current.status = 1;
+    },
+    onCtxOpen(locals) {
+      this.current = locals
     },
     getStyle: function(elt) {
       let style = JSON.parse(elt.style);

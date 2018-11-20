@@ -178,4 +178,13 @@ body {
 	height: 100%;
 	width: 100%;
 }
+.Kdo .nop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-image: url(./assets/Rcroix.svg);
+	background-size: 100% 100%
+}
 </style>

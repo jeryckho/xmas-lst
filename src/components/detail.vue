@@ -6,8 +6,11 @@
       <span v-html="slugList.description"></span><br>
     </div>
     <div v-if="Details.length" v-for="kdo in slugDetails" :key="kdo.id" class="Kdo pointer" :style="getStyle(kdo)">
-        <a v-if="kdo.hasimage == 1" :href="kdo.link" target="_blank"><img class="ki" :src="kdo.image"></a>
-        <img class="ki" src="/static/img/Rcroix.svg" v-show="kdo.status == 0">
+      <a v-if="kdo.link != ''" :href="kdo.link" target="_blank">
+        <img v-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image">
+      </a>
+      <img v-else-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image">
+      <div class="nop" v-show="kdo.status == 0"></div>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ import firebase from 'firebase'
 
 import List from '@/components/list'
 import Detail from '@/components/detail'
-import Void from '@/components/void'
+import Write from '@/components/write'
 
 Vue.use(Router)
 
@@ -24,6 +24,11 @@ const routeur = new Router({
       path: '/liste/:slug',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/make/:slug',
+      name: 'Write',
+      component: Write
     },
   ]
 })

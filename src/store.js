@@ -51,6 +51,16 @@ export const store = new Vuex.Store({
                 state.Lists = []
             }
         },
+        setStyle(state, payload) {
+            state.Details.forEach(elem => {
+                if (elem.id == payload.id) {
+                    elem.status = "0";
+                }
+            });
+            fb.detailsCollection.doc(payload.id).update({
+                style: payload.style
+            })
+        },
         Take(state, id) {
             state.Details.forEach(elem => {
                 if (elem.id == id) {

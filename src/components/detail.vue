@@ -42,15 +42,15 @@
       @ctx-open="onCtxOpen"
     >
       <div v-if="current">
-        <li :class="{'ctx-item':true, disabled:(current.status == 0)}" @click="Take" >Réserver</li>
-        <li :class="{'ctx-item':true, disabled:(current.status != 0)}" @click="Free" >Libérer</li>
+        <li :class="{'ctx-item':true, disabled:(current.status == 0)}" @click="Take(current.id)" >Réserver</li>
+        <li :class="{'ctx-item':true, disabled:(current.status != 0)}" @click="Free(current.id)" >Libérer</li>
       </div>
     </context-menu>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import contextMenu from 'vue-context-menu'
 const fb = require('../firebaseConfig.js')
 
@@ -74,12 +74,10 @@ export default {
     },
   },
   methods: {
-    Take() {
-      this.current.status = 0;
-    },
-    Free() {
-      this.current.status = 1;
-    },
+    ...mapMutations([
+      'Take',
+      'Free',
+    ]),
     onCtxOpen(locals) {
       this.current = locals
     },

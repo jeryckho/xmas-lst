@@ -50,6 +50,26 @@ export const store = new Vuex.Store({
             } else {
                 state.Lists = []
             }
+        },
+        Take(state, id) {
+            state.Details.forEach(elem => {
+                if (elem.id == id) {
+                    elem.status = "0";
+                }
+            });
+            fb.detailsCollection.doc(id).update({
+                status: "0"
+            })
+        },
+        Free(state, id) {
+            state.Details.forEach(elem => {
+                if (elem.id == id) {
+                    elem.status = "1";
+                }
+            });
+            fb.detailsCollection.doc(id).update({
+                status: "1"
+            })
         }
     }
 })

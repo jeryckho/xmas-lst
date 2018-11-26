@@ -54,7 +54,7 @@ export const store = new Vuex.Store({
         setStyle(state, payload) {
             state.Details.forEach(elem => {
                 if (elem.id == payload.id) {
-                    elem.status = "0";
+                    elem.style = payload.style;
                 }
             });
             fb.detailsCollection.doc(payload.id).update({

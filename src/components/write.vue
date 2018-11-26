@@ -18,19 +18,41 @@
       @dragstop="onDraged"
       @activated="onActivated(kdo)"
     >
-      <img
-        v-if="kdo.hasimage == 1"
-        class="ki"
-        :src="kdo.image"
-        :alt="kdo.image"
-      >
+      <div class="ki" @contextmenu.prevent="onCtx(kdo)">
+        <img
+          v-if="kdo.hasimage == 1"
+          class="ki"
+          :src="kdo.image"
+          :alt="kdo.image"
+        >
+      </div>
     </VueDraggableResizable>
+    <SweetModal :title="current ? 'Item N°'+current.id : 'Item'" ref="modal">
+      <SweetModalTab title="Détails" id="tab1">
+        <div v-if="current">
+          Présence image : <input type="checkbox" name="hasImage" id="hasImage" v-model="current.hasimage" true-value="1" false-value="0"> <br>
+          Image : <input type="url" name="Image" id="Image" v-model="current.image"><br>
+          Lien : <input type="url" name="Link" id="Link" v-model="current.link">
+        </div>
+      </SweetModalTab>
+      <SweetModalTab title="Position" id="tab2">
+        <div v-if="current">
+          {{current}}
+        </div>
+      </SweetModalTab>
+      <SweetModalTab title="Status" id="tab3">
+        <div v-if="current">
+          Statut : <input type="checkbox" name="Sts" id="Sts" v-model="current.status" true-value="1" false-value="0"> <br>
+        </div>
+      </SweetModalTab>
+    </SweetModal>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 import VueDraggableResizable from 'vue-draggable-resizable'
+import { SweetModal, SweetModalTab } from 'sweet-modal-vue'
 const fb = require('../firebaseConfig.js')
 
 export default {
@@ -41,7 +63,7 @@ export default {
       current: null
     }
   },
-  components: { VueDraggableResizable },
+  components: { VueDraggableResizable, SweetModal, SweetModalTab },
   computed: {
     ...mapState(['Lists','Details']),
     slugDetails: function() {
@@ -60,6 +82,10 @@ export default {
     ]),
     onActivated(locals) {
       this.current = locals;
+    },
+    onCtx(locals) {
+      this.current = locals;
+      this.$refs.modal.open('tab1')
     },
     onResized(x, y, width, height, degree) {
       this.setStyle({ id: this.current.id, style: JSON.stringify([ y+"px", x+"px", height+"px", width+"px", degree.toString() ]) })

@@ -45,6 +45,8 @@
           Libre : <input type="checkbox" name="Sts" id="Sts" v-model="modal.status" true-value="1" false-value="0"> <br>
         </div>
       </SweetModalTab>
+      <button class="blue" slot="button" @click="onModif">Modifier</button>
+      <button slot="button" @click="onClose">Annuler</button>
     </SweetModal>
   </div>
 </template>
@@ -79,8 +81,16 @@ export default {
     ...mapMutations([
       'Take',
       'Free',
+      'setItem',
       'setStyle'
     ]),
+    onModif() {
+      this.setItem(this.modal);
+      this.$refs.modal.close();
+    },
+    onClose() {
+      this.$refs.modal.close();
+    },
     onActivated(locals) {
       this.current = locals;
     },
@@ -124,5 +134,34 @@ export default {
 	left: 0;
 	height: 100%;
 	width: 100%;
+	border: 1px solid red;
+}
+button {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+  display: inline-block;
+  text-decoration: none;
+  outline: 0;
+  text-align: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 2px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+button.blue {
+  background: #1E88E5;
+  border: 1px solid #1468b1;
 }
 </style>

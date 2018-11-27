@@ -27,22 +27,22 @@
         >
       </div>
     </VueDraggableResizable>
-    <SweetModal :title="current ? 'Item N°'+current.id : 'Item'" ref="modal">
+    <SweetModal :title="modal ? 'Item N°'+modal.id : 'Item'" ref="modal">
       <SweetModalTab title="Détails" id="tab1">
-        <div v-if="current">
-          Présence image : <input type="checkbox" name="hasImage" id="hasImage" v-model="current.hasimage" true-value="1" false-value="0"> <br>
-          Image : <input type="url" name="Image" id="Image" v-model="current.image"><br>
-          Lien : <input type="url" name="Link" id="Link" v-model="current.link">
+        <div v-if="modal">
+          Présence image : <input type="checkbox" name="hasImage" id="hasImage" v-model="modal.hasimage" true-value="1" false-value="0"> <br>
+          Image : <input type="url" name="Image" id="Image" v-model="modal.image"><br>
+          Lien : <input type="url" name="Link" id="Link" v-model="modal.link">
         </div>
       </SweetModalTab>
       <SweetModalTab title="Position" id="tab2">
-        <div v-if="current">
-          {{current}}
+        <div v-if="modal">
+          {{modal}}
         </div>
       </SweetModalTab>
       <SweetModalTab title="Status" id="tab3">
-        <div v-if="current">
-          Statut : <input type="checkbox" name="Sts" id="Sts" v-model="current.status" true-value="1" false-value="0"> <br>
+        <div v-if="modal">
+          Libre : <input type="checkbox" name="Sts" id="Sts" v-model="modal.status" true-value="1" false-value="0"> <br>
         </div>
       </SweetModalTab>
     </SweetModal>
@@ -60,7 +60,8 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      current: null
+      current: null,
+      modal: null
     }
   },
   components: { VueDraggableResizable, SweetModal, SweetModalTab },
@@ -85,6 +86,7 @@ export default {
     },
     onCtx(locals) {
       this.current = locals;
+      this.modal = {...locals}
       this.$refs.modal.open('tab1')
     },
     onResized(x, y, width, height, degree) {

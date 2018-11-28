@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import leftPad from "left-pad";
 const fb = require("./firebaseConfig.js");
 
 Vue.use(Vuex);
@@ -49,6 +50,17 @@ export const store = new Vuex.Store({
 				state.Lists = [];
 			}
 		},
+		addItem(state, payload) {
+			let crt = "";
+			state.Details.forEach(elem => {
+				if (elem.id > crt) {
+					crt = elem.id;
+				}
+			});
+			let maxId = leftPad(parseInt(crt)+1, 4, 0);
+			state.Details.push({ ...payload, id: maxId });
+			fb.detailsCollection.doc(maxId).set({ ...payload, id: maxId });
+	},
 		setItem(state, payload) {
 			state.Details.forEach(elem => {
 				if (elem.id == payload.id) {

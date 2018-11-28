@@ -185,4 +185,13 @@ body {
 	background-image: url(./assets/Rcroix.svg);
 	background-size: 100% 100%;
 }
+.tache {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-image: url(./assets/Tache.gif);
+	width: 124px;
+	height: 94px;
+	cursor: pointer;
+}
 </style>

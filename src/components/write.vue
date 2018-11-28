@@ -61,6 +61,7 @@
 			<button class="blue" slot="button" @click="onModif">Modifier</button>
 			<button slot="button" @click="onClose">Annuler</button>
 		</SweetModal>
+		<div class="tache" @click="addOne()"></div>
 	</div>
 </template>
 
@@ -93,7 +94,17 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(["Take", "Free", "setItem", "setStyle"]),
+		...mapMutations(["Take", "Free", "setItem", "setStyle","addItem"]),
+		addOne() {
+			this.addItem({
+				"hasimage": "0",
+				"image": "",
+				"link": "",
+				"slug": this.$route.params.slug,
+				"status": "1",
+				"style": "[\"50px\",\"50px\",\"100px\",\"100px\",\"0\"]"
+			});
+		},
 		onModif() {
 			this.setItem(this.modal);
 			this.$refs.modal.close();

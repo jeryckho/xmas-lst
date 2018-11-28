@@ -1,13 +1,11 @@
 <template>
-    <div id="app">
-        <router-view/>
-    </div>
+	<div id="app">
+		<router-view/>
+	</div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
 <style>
@@ -21,7 +19,7 @@ body {
 	margin-right: auto;
 	background-image: url(./assets/Page.gif);
 	background-repeat: repeat-y;
-	font-family: "Comic Sans MS",arial,monospace;
+	font-family: "Comic Sans MS", arial, monospace;
 	line-height: 28px;
 	font-size: 20px;
 	padding-top: 5px;
@@ -185,6 +183,6 @@ body {
 	height: 100%;
 	width: 100%;
 	background-image: url(./assets/Rcroix.svg);
-	background-size: 100% 100%
+	background-size: 100% 100%;
 }
 </style>

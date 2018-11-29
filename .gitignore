@@ -16,3 +16,4 @@ yarn-error.log*
 static/img/
 
 .firebase/
+src/firebaseSecret.js

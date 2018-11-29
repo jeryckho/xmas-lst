@@ -1,15 +1,7 @@
 import firebase from "firebase";
 import "firebase/firestore";
+import {config} from "./firebaseSecret.js";
 
-// firebase init goes here
-const config = {
-	apiKey: "AIzaSyAa-bH8cBW7Nxd41pOuNY9KRdv-rgdRLR8",
-	authDomain: "xmas-lst.firebaseapp.com",
-	databaseURL: "https://xmas-lst.firebaseio.com",
-	projectId: "xmas-lst",
-	storageBucket: "xmas-lst.appspot.com",
-	messagingSenderId: "825245328564"
-};
 firebase.initializeApp(config);
 
 // firebase utils

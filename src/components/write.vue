@@ -59,6 +59,7 @@
 				</div>
 			</SweetModalTab>
 			<button class="blue" slot="button" @click="onModif">Modifier</button>
+			<button class="red" slot="button" @click="onSuppr">Supprimer</button>
 			<button slot="button" @click="onClose">Annuler</button>
 		</SweetModal>
 		<div class="tache" @click="addOne()"></div>
@@ -94,7 +95,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(["Take", "Free", "setItem", "setStyle","addItem"]),
+		...mapMutations(["Take", "Free", "setItem", "delItem", "setStyle","addItem"]),
 		addOne() {
 			this.addItem({
 				"hasimage": "0",
@@ -107,6 +108,10 @@ export default {
 		},
 		onModif() {
 			this.setItem(this.modal);
+			this.$refs.modal.close();
+		},
+		onSuppr() {
+			this.delItem(this.modal);
 			this.$refs.modal.close();
 		},
 		onClose() {
@@ -202,5 +207,9 @@ button {
 button.blue {
 	background: #1e88e5;
 	border: 1px solid #1468b1;
+}
+button.red {
+	background: #881ee5;
+	border: 1px solid #6814b1;
 }
 </style>

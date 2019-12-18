@@ -69,6 +69,14 @@ export const store = new Vuex.Store({
 			});
 			fb.detailsCollection.doc(payload.id).update(payload);
 		},
+		delItem(state, payload) {
+			state.Details.forEach(elem => {
+				if (elem.id == payload.id) {
+					elem = { ...elem, ...payload };
+				}
+			});
+			fb.detailsCollection.doc(payload.id).delete();
+		},
 		setStyle(state, payload) {
 			state.Details.forEach(elem => {
 				if (elem.id == payload.id) {

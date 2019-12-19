@@ -3,10 +3,10 @@
 		<div v-if="slugList">
 			<h1 v-html="slugList.titre"></h1>
 			<em>(Cliquez sur une image pour voir les détails, clic-droit pour réserver l'élément)</em>
-			<br>
-			<br>
+			<br />
+			<br />
 			<span v-html="slugList.description"></span>
-			<br>
+			<br />
 		</div>
 		<VueDraggableResizable
 			v-if="Details.length"
@@ -22,7 +22,7 @@
 			@activated="onActivated(kdo)"
 		>
 			<div class="ki" @contextmenu.prevent="onCtx(kdo)">
-				<img v-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image">
+				<img v-if="kdo.hasimage == 1" class="ki" :src="kdo.image" :alt="kdo.image" />
 			</div>
 		</VueDraggableResizable>
 		<SweetModal :title="modal ? 'Item N°'+modal.id : 'Item'" ref="modal">
@@ -35,11 +35,11 @@
 						v-model="modal.hasimage"
 						true-value="1"
 						false-value="0"
-					>
-					<br>Image :
-					<input type="url" name="Image" id="Image" v-model="modal.image">
-					<br>Lien :
-					<input type="url" name="Link" id="Link" v-model="modal.link">
+					/>
+					<br />Image :
+					<input type="url" name="Image" id="Image" v-model="modal.image" />
+					<br />Lien :
+					<input type="url" name="Link" id="Link" v-model="modal.link" />
 				</div>
 			</SweetModalTab>
 			<SweetModalTab title="Position" id="tab2">
@@ -54,8 +54,8 @@
 						v-model="modal.status"
 						true-value="1"
 						false-value="0"
-					>
-					<br>
+					/>
+					<br />
 				</div>
 			</SweetModalTab>
 			<button class="blue" slot="button" @click="onModif">Modifier</button>
@@ -98,12 +98,12 @@ export default {
 		...mapMutations(["Take", "Free", "setItem", "delItem", "setStyle","addItem"]),
 		addOne() {
 			this.addItem({
-				"hasimage": "0",
-				"image": "",
-				"link": "",
-				"slug": this.$route.params.slug,
-				"status": "1",
-				"style": "[\"50px\",\"50px\",\"100px\",\"100px\",\"0\"]"
+				hasimage: "0",
+				image: "",
+				link: "",
+				slug: this.$route.params.slug,
+				status: "1",
+				style: '["50px","50px","100px","100px","0"]'
 			});
 		},
 		onModif() {

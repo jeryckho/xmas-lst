@@ -1,10 +1,10 @@
 <template>
 	<div class="Feuille">
 		<h1>Listes</h1>
-		<br>
+		<br />
 		<div v-if="Lists.length" v-for="list in Lists" :key="list.id">
 			<a :href="'#/liste/'+list.slug">{{ list.titre }}</a>
-			<br>
+			<br />
 		</div>
 	</div>
 </template>
